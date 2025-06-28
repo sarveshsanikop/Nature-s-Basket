@@ -1,4 +1,4 @@
-# 🥦 Nature's Basket – An Organic Marketplace
+#  Nature's Basket – An Organic Marketplace
 
 Welcome to **Nature's Basket**, a full-stack web application where users can shop fresh, organic produce directly from local farmers. It supports **farmer onboarding**, **product management**, **cart functionality**, and a **community feature** – all backed by **Supabase** and deployed via **Render + Netlify**.
 
@@ -6,7 +6,7 @@ Welcome to **Nature's Basket**, a full-stack web application where users can sho
 
 ## 📸 Project Logo
 
-![Nature's Basket Logo](FRONT-END/Photos/logo1.jpg)
+#![Nature's Basket Logo](FRONT-END/Photos/logo1.jpg)
 
 ---
 
