@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | Organic Farm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('Photos/org5.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    /* Optional dark overlay for better contrast (not blur) */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3); /* Transparent black overlay */
+      z-index: 0;
+    }
+
+    .signup-container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      text-align: center;
+    }
+
+    .signup-container h2 {
+      margin-bottom: 20px;
+      color: #4CAF50;
+    }
+
+    .signup-container form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .signup-container input {
+      margin-bottom: 15px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+      background: #fdfdfd;
+    }
+
+    .signup-container button {
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .signup-container button:hover {
+      background: #388e3c;
+    }
+
+    .signup-container .alt-action {
+      margin-top: 10px;
+    }
+
+    .signup-container a {
+      color: #FFA500;
+      text-decoration: none;
+    }
+
+    .signup-container a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Sign Up for Nature's Basket</h2>
+    <form id="signupForm">
+      <input type="text" name="user_name" placeholder="Enter your full name" required />
+      <input type="email" name="email" placeholder="Enter your email" required />
+      <input type="password" name="password" placeholder="Create a password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="alt-action">
+      <p>Already have an account? <a href="/">Login</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const user_name = form.user_name.value;
+      const email = form.email.value;
+      const password = form.password.value;
+
+      const res = await fetch('/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_name, email, password })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        window.location.href = '/dashboard.html';
+      } else {
+        alert(data.message || 'Signup failed');
+      }
+    });
+  </script>
+
+</body>
+</html>
