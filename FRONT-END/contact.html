@@ -4,45 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organic Farm</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@700&display=swap" rel="stylesheet">
     <style>
+
         /* General Styles */
-        body {
-            font-family: 'Lora', serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: #444;
-            overflow-x: hidden;
-            background-color: #f9f9f9;
-        }
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #444;
+    overflow-x: hidden;
+    background-color: #f9f9f9; /* Subtle off-white background */
+}
 
         /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
         }
+/* Header */
+header {
+    background: #2a5934; /* Rich dark green for organic feel */
+    color: white;
+    padding: 10px 0; /* Reduced padding (previously 15px 0) */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        /* Header */
-        header {
-            background: #2a5934;
-            color: white;
-            padding: 10px 0;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        header .logo {
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+header .logo {
     display: flex;
     align-items: center;
 }
@@ -66,25 +67,59 @@ header .logo span.white-text {
 }
 
 
-        header nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            padding: 0;
-            margin: 0;
-        }
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px; /* Space between navigation items */
+    padding: 0;
+    margin: 0;
+}
 
-        header nav ul li a {
-            text-decoration: none;
-            color: #f4f4f4;
-            font-size: 20px;
-            font-family: 'Times New Roman', serif;
-            transition: color 0.3s;
-        }
+header nav ul li a {
+    text-decoration: none;
+    color:white; /* Light grey for softer contrast */
+    
+    font-size: 20px; /* Increased font size */
+    font-family: 'Times New Roman', serif; /* Times New Roman for a classic look */
+    transition: color 0.3s;
+}
 
-        header nav ul li a:hover {
-            color: #ffca3a;
-        }
+header nav ul li a:hover {
+    color: #ffca3a; /* Warm yellow highlight on hover */
+}
+
+/* Styling for subpage content */
+body {
+    font-family: 'Times New Roman', serif; /* Times New Roman for the entire site */
+    color: #333; /* Dark grey for text for better readability */
+    background-color: #f9f9f9; /* Light background for subpages */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Times New Roman', serif; /* Times New Roman for headings */
+    font-weight: bold;
+    color: white; /* Dark green for headings to maintain theme */
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555; /* Softer grey for paragraph text */
+    font-family: 'Times New Roman', serif; /* Times New Roman for paragraphs */
+    margin-bottom: 20px;
+}
+
+a {
+    color: white; /* Dark green for links */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color:white; /* Yellow highlight on hover for links */
+}
 
         /* Contact Section */
         #contact {
