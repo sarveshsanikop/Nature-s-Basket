@@ -103,15 +103,42 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login to Nature's Basket</h2>
-        <form action="/selllogin" method="POST">
+        <h2>Farmer Login - Nature's Basket</h2>
+        <form id="farmerLoginForm">
             <input type="email" name="email" placeholder="Enter your email" required>
             <input type="password" name="password" placeholder="Enter your password" required>
             <button type="submit">Login</button>
         </form>
         <div class="alt-action">
-            <p>Don't have an account? <a href="sellsignup.html">Sign Up</a></p>
+            <p>Don't have an account? <a href="sellsignup.html">Register as Farmer</a></p>
         </div>
     </div>
+
+    <script>
+        document.getElementById("farmerLoginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = this.email.value;
+            const password = this.password.value;
+
+            try {
+                const response = await fetch("/selllogin", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    window.location.href = "/farmerdashboard";
+                } else {
+                    const result = await response.json();
+                    alert(result.message || "Farmer login failed. Please try again.");
+                }
+            } catch (err) {
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    </script>
 </body>
+
 </html>
