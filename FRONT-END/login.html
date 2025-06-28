@@ -113,5 +113,32 @@
             <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
         </div>
     </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = this.email.value;
+            const password = this.password.value;
+
+            try {
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    window.location.href = "/dashboard";
+                } else {
+                    const result = await response.json();
+                    alert(result.message || "Login failed. Please try again.");
+                }
+            } catch (err) {
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    </script>
 </body>
+
 </html>
