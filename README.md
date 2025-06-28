@@ -6,7 +6,7 @@ Welcome to **Nature's Basket**, a full-stack web application where users can sho
 
 ## 📸 Project Logo
 
-#![Nature's Basket Logo](FRONT-END/Photos/logo1.jpg)
+![Nature's Basket Logo](FRONT-END/Photos/logo1.jpg)
 
 ---
 
