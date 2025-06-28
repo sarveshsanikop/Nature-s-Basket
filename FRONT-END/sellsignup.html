@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - Become a Vendor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+     body {
+      font-family: 'Lora', serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('Photos/org5.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    .container {
+      max-width: 750px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group-full {
+      flex: 1 1 100%;
+    }
+
+    input, textarea {
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background: #eee;
+      padding: 12px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <section class="signup">
+    <div class="container">
+      <h2>Create a Vendor Account</h2>
+      <form id="farmerSignupForm">
+        <div class="form-group">
+          <label for="farmer_name">Full Name:</label>
+          <input type="text" id="farmer_name" name="farmer_name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone_number">Phone Number:</label>
+          <input type="tel" id="phone_number" name="phone_number" required />
+        </div>
+
+        <div class="form-group">
+          <label for="farm_location">Farm Location:</label>
+          <input type="text" id="farm_location" name="farm_location" required />
+        </div>
+
+        <div class="form-group-full">
+          <label for="address">Address:</label>
+          <textarea id="address" name="address" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group-full">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group-full">
+          <button type="submit">Sign Up</button>
+        </div>
+      </form>
+      <p>Already have an account? <a href="selllogin.html">Login here</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 OrganicFarm. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ AJAX Signup Script -->
+  <script>
+    document.getElementById('farmerSignupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+
+      const payload = {
+        farmer_name: form.farmer_name.value,
+        email: form.email.value,
+        phone_number: form.phone_number.value,
+        address: form.address.value,
+        farm_location: form.farm_location.value,
+        password: form.password.value,
+      };
+
+      try {
+        const res = await fetch('/sellsignup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          window.location.href = '/farmerdashboard.html';
+        } else {
+          alert(data.message || 'Signup failed');
+        }
+      } catch (err) {
+        console.error('Signup error:', err);
+        alert('An unexpected error occurred');
+      }
+    });
+  </script>
+</body>
+</html>

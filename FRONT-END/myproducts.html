@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Products | Farmer Dashboard</title>
+
+  <!-- Fonts and CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5fdf7;
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      background: #2a5934;
+      color: white;
+      padding: 10px 0;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    header .logo span {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      font-weight: bold;
+      color: #ffca3a;
+    }
+
+    header .logo span.white-text {
+      color: white;
+      margin-left: 10px;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    header nav ul li a {
+      text-decoration: none;
+      color: #f4f4f4;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    header nav ul li a:hover {
+      color: #ffca3a;
+    }
+
+    .container h2 {
+      margin-top: 40px;
+      font-weight: 600;
+      color: #2e7d32;
+      text-align: center;
+    }
+
+    .card {
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .card-text {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px 0;
+      background-color: #2e7d32;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="Photos/logo.png" alt="Logo">
+        <span>Nature's</span><span class="white-text">Basket</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="farmerdashboard.html">Add Product</a></li>
+          <li><a href="myproducts.html">My Products</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Grid -->
+  <div class="container">
+    <h2>My Products</h2>
+    <div id="productsContainer" class="row justify-content-center">
+      <!-- Dynamic Product Cards Will Appear Here -->
+    </div>
+  </div>
+
+  <footer>&copy; 2025 Nature's Basket | Empowering Organic Farmers</footer>
+
+  <!-- JS: Load Farmer Products -->
+  <script>
+    window.onload = function () {
+      fetch('/myProducts')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('productsContainer');
+          if (data.length > 0) {
+            data.forEach(product => {
+              const card = document.createElement('div');
+              card.className = 'col-md-4 mb-4';
+              card.innerHTML = `
+                <div class="card">
+                  <img src="${product.image_url}" class="card-img-top" alt="${product.product_name}" onerror="this.onerror=null; this.src='Photos/fallback.jpg';">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.product_name}</h5>
+                    <p class="card-text">${product.description}</p>
+                    <p class="card-text"><strong>Category:</strong> ${product.category}</p>
+                    <p class="card-text"><strong>Price:</strong> ₹${product.price}</p>
+                    <p class="card-text"><strong>Available:</strong> ${product.quantity}</p>
+                  </div>
+                </div>
+              `;
+              container.appendChild(card);
+            });
+          } else {
+            container.innerHTML = '<p class="text-center mt-4">No products added yet.</p>';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error fetching products');
+        });
+    };
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
