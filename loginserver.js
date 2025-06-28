@@ -38,7 +38,8 @@ app.post("/login", async (req, res) => {
 
     if (error || !data) {
         console.error("User login error:", error);
-        return res.send(`<h2>Invalid email or password!</h2><a href="/">Go back to Login</a>`);
+        return res.status(401).json({ success: false, message: "Invalid email or password!" });
+
     }
 
     req.session.userId = data.user_id;
@@ -60,7 +61,8 @@ app.post("/selllogin", async (req, res) => {
 
     if (error || !data) {
         console.error("Farmer login error:", error);
-        return res.send(`<h2>Invalid email or password for Farmer Login!</h2><a href="/">Go back</a>`);
+        return res.status(401).json({ success: false, message: "Invalid email or password for Farmer Login!" });
+
     }
 
     req.session.farmerId = data.farmer_id;
