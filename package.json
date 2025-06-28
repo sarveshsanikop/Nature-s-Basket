@@ -1,0 +1,16 @@
+{
+  "name": "natures-basket-backend",
+  "version": "1.0.0",
+  "description": "Node.js + Supabase backend for Nature's Basket organic marketplace",
+  "main": "loginserver.js",
+  "scripts": {
+    "start": "node loginserver.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.2",
+    "body-parser": "^2.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1"
+  }
+}
