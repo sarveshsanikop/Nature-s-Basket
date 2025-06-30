@@ -77,7 +77,8 @@ header nav ul {
 
 header nav ul li a {
     text-decoration: none;
-    color: #f4f4f4; /* Light grey for softer contrast */
+    color:white; /* Light grey for softer contrast */
+    
     font-size: 20px; /* Increased font size */
     font-family: 'Times New Roman', serif; /* Times New Roman for a classic look */
     transition: color 0.3s;
@@ -493,7 +494,7 @@ footer {
                     <li><a href="index.html">Home</a></li>
                     <li><a href="organicway.html">The Organic Way</a></li>
                     <li><a href="farmmedia.html">Farm Stories</a></li>
-                    <li><a href="login.html">Shop Fresh</a></li>
+                    <li><a href="#" onclick="handleShopFresh()">Shop Fresh</a></li>
                     <li><a href="selllogin.html">Partner With Us</a></li>
                     <li><a href="contact.html">Get in Touch</a></li>
                 </ul>
@@ -1124,6 +1125,24 @@ Taste the Difference of Organic.
   
 </script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+  async function handleShopFresh() {
+    try {
+      const response = await fetch('/get-cart');
+      if (response.status === 401) {
+        // Not logged in
+        window.location.href = "login.html";
+      } else {
+        // Logged in
+        window.location.href = "dashboard";
+      }
+    } catch (err) {
+      console.error("Error checking session:", err);
+      window.location.href = "login.html"; // fallback
+    }
+  }
+</script>
+
 </body>
 </html>
 
