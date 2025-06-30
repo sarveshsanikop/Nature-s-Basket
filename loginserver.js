@@ -38,7 +38,7 @@ app.post("/login", async (req, res) => {
 
     if (error || !data) {
         console.error("User login error:", error);
-        return res.status(401).json({ success: false, message: "Invalid email or password!" });
+return res.status(401).json({ success: false, message: "Invalid email or password!" });
 
     }
 
@@ -61,7 +61,7 @@ app.post("/selllogin", async (req, res) => {
 
     if (error || !data) {
         console.error("Farmer login error:", error);
-        return res.status(401).json({ success: false, message: "Invalid email or password for Farmer Login!" });
+       return res.status(401).json({ success: false, message: "Invalid email or password for Farmer Login!" });
 
     }
 
@@ -335,6 +335,23 @@ app.post('/checkout', async (req, res) => {
     console.error('❌ Checkout error:', err);
     res.status(500).json({ success: false, message: 'Checkout failed. Try again.' });
   }
+});
+app.get('/getUserProfile', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ error: 'Not logged in' });
+    }
+
+    const { data, error } = await supabase
+        .from("users")
+        .select("user_name")
+        .eq("user_id", req.session.userId)
+        .single();
+
+    if (error || !data) {
+        return res.status(500).json({ error: 'Failed to fetch user name' });
+    }
+
+    res.json({ user_name: data.user_name });
 });
 
 
