@@ -72,6 +72,7 @@
     header nav ul li a {
       text-decoration: none;
       color: #f4f4f4;
+    
       font-size: 20px;
       font-family: 'Times New Roman', serif;
       transition: color 0.3s;
@@ -205,7 +206,8 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="organicway.html">The Organic Way</a></li>
           <li><a href="farmmedia.html">Farm Stories</a></li>
-          <li><a href="login.html">Shop Fresh</a></li>
+          <li><a href="#" onclick="handleShopFresh()">Shop Fresh</a></li>
+
           <li><a href="selllogin.html">Partner With Us</a></li>
           <li><a href="contact.html">Get in Touch</a></li>
         </ul>
@@ -297,6 +299,23 @@
         section.appendChild(div);
       });
     }
-  </script>
+  
+  async function handleShopFresh() {
+    try {
+      const response = await fetch('/get-cart');
+      if (response.status === 401) {
+        // Not logged in
+        window.location.href = "login.html";
+      } else {
+        // Logged in
+        window.location.href = "dashboard";
+      }
+    } catch (err) {
+      console.error("Error checking session:", err);
+      window.location.href = "login.html"; // fallback
+    }
+  }
+</script>
+
 </body>
 </html>
