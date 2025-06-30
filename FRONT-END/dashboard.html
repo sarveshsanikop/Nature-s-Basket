@@ -75,6 +75,7 @@
     header nav ul li a {
       text-decoration: none;
       color: #f4f4f4;
+    
       font-size: 20px;
       font-family: 'Times New Roman', serif;
       transition: color 0.3s;
@@ -207,6 +208,19 @@
       padding: 15px;
       font-size: 14px;
     }
+    #logoutBtn {
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: black !important;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+#logoutBtn:hover {
+  background-color: white;
+}
+
   </style>
 </head>
 <body>
@@ -222,15 +236,20 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="organicway.html">The Organic Way</a></li>
           <li><a href="farmmedia.html">Farm Stories</a></li>
-          <li><a href="login.html">Shop Fresh</a></li>
+          <li><a href="#" onclick="handleShopFresh()">Shop Fresh</a></li>
+
           <li><a href="selllogin.html">Partner With Us</a></li>
           <li><a href="cart.html">Cart</a></li>
+          <li><a href="/logout" id="logoutBtn">Logout</a></li>
+
         </ul>
       </nav>
     </div>
   </header>
 
   <!-- Search Bar -->
+   <h2 id="welcomeUser" style="text-align:center; color:#2a5934; margin-top:20px;"></h2>
+
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="Search products..." oninput="fetchProducts()"/>
     <button class="cart-button">Search</button>
@@ -344,6 +363,38 @@
 
     // Initial load
     fetchProducts();
-  </script>
+  
+  async function handleShopFresh() {
+    try {
+      const response = await fetch('/get-cart');
+      if (response.status === 401) {
+        // Not logged in
+        window.location.href = "login.html";
+      } else {
+        // Logged in
+        window.location.href = "dashboard";
+      }
+    } catch (err) {
+      console.error("Error checking session:", err);
+      window.location.href = "login.html"; // fallback
+    }
+  }
+  // Fetch and display user's name
+fetch('/getUserProfile')
+  .then(res => {
+    if (!res.ok) throw new Error("Not logged in");
+    return res.json();
+  })
+  .then(data => {
+    document.getElementById('welcomeUser').innerText = `Welcome, ${data.user_name}!`;
+  })
+  .catch(err => {
+    console.error('Failed to fetch user profile:', err);
+    // Optional: Redirect to login page if session is expired
+    // window.location.href = "/login.html";
+  });
+
+</script>
+
 </body>
 </html>
