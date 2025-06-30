@@ -249,7 +249,7 @@ a:hover {
                     <li><a href="index.html">Home</a></li>
                     <li><a href="organicway.html">The Organic Way</a></li>
                     <li><a href="farmmedia.html">Farm Stories</a></li>
-                    <li><a href="login.html">Shop Fresh</a></li>
+                    <li><a href="#" onclick="handleShopFresh()">Shop Fresh</a></li>
                     <li><a href="selllogin.html">Partner With Us</a></li>
                     <li><a href="contact.html">Get in Touch</a></li>
                 </ul>
@@ -287,6 +287,23 @@ a:hover {
             </form>
         </div>
     </section>
+<script>
+  async function handleShopFresh() {
+    try {
+      const response = await fetch('/get-cart');
+      if (response.status === 401) {
+        // Not logged in
+        window.location.href = "login.html";
+      } else {
+        // Logged in
+        window.location.href = "dashboard";
+      }
+    } catch (err) {
+      console.error("Error checking session:", err);
+      window.location.href = "login.html"; // fallback
+    }
+  }
+</script>
 
     <!-- Footer -->
     <footer>
